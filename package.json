@@ -30,13 +30,14 @@
   "scripts": {
     "typescript": "tsc --skipLibCheck --noEmit",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
-    "build": "bob build && yarn copy-dts && yarn delete-dts.js && yarn delete-debug-view",
+    "build": "bob build && npm run copy-dts && npm run delete-dts.js && npm run delete-debug-view",
     "copy-dts": "copyfiles -u 1 \"src/**/*.d.ts\" lib/typescript",
     "delete-debug-view": "rm -r ./lib/commonjs/components/bottomSheetDebugView && rm -r ./lib/module/components/bottomSheetDebugView && rm -r ./lib/typescript/components/bottomSheetDebugView",
     "delete-dts.js": "find ./lib/commonjs -name '*.d.js*' -delete && find ./lib/module -name '*.d.js*' -delete",
-    "release": "rm -rf lib && yarn build && release-it",
-    "example": "yarn --cwd example",
-    "bootstrap": "yarn install && yarn example"
+    "release": "rm -rf lib && npm run build && release-it",
+    "prepare": "npm run build",
+    "example": "npm run --cwd example",
+    "bootstrap": "npm install && npm run example"
   },
   "dependencies": {
     "@gorhom/portal": "1.0.14",
